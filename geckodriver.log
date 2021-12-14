@@ -1,0 +1,564 @@
+1639451535023	geckodriver	INFO	Listening on 127.0.0.1:49365
+1639451535027	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "34613" "-no-remote" "-profile" "/tmp/rust_mozprofilewa8Apm"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639451536314	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilewa8Apm/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:34613/devtools/browser/2ff93a3e-a64b-4f88-85f9-2e3f63cd2f75
+1639451537935	Marionette	INFO	Listening on port 34113
+1639451537978	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://www.gstatic.com/recaptcha/releases/rPvs0Nyx3sANE-ZHUN-0nM85/styles__ltr.css without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://149649310.v2.pressablecdn.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2 without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://149649310.v2.pressablecdn.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3 without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://149649310.v2.pressablecdn.com/wp-content/plugins/responsive-accordion-and-collapse/css/font-awesome/css/font-awesome.min.css?ver=5.8.2 without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://149649310.v2.pressablecdn.com/wp-content/plugins/responsive-accordion-and-collapse/css/bootstrap-front.css?ver=5.8.2 without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://fonts.googleapis.com/css?family=Lato%3A300&ver=5.8.2 without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://149649310.v2.pressablecdn.com/wp-content/themes/BIS-Theme/css/blue-bis-theme.min.css?ver=2.7 without a browsingContextID set
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://149649310.v2.pressablecdn.com/wp-content/themes/BIS-Theme/css/font-awesome.min.css?ver=2.7 without a browsingContextID set
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+1639451568621	Marionette	INFO	Stopped listening on port 34113
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639451579700	geckodriver	INFO	Listening on 127.0.0.1:58129
+1639451579704	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "41655" "-no-remote" "-profile" "/tmp/rust_mozprofilezmJZqm"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639451581028	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilezmJZqm/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:41655/devtools/browser/4154a7fb-e9c8-4ad3-a7d4-94e1bd834d47
+1639451582588	Marionette	INFO	Listening on port 33089
+1639451582687	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://esearch.brazoscad.org"
+1639451604245	Marionette	INFO	Stopped listening on port 33089
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639452205285	geckodriver	INFO	Listening on 127.0.0.1:51669
+1639452205289	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "57367" "-no-remote" "-profile" "/tmp/rust_mozprofilePhCR5N"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639452206688	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilePhCR5N/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57367/devtools/browser/3d430100-b047-4af2-91bb-7ebce83a423d
+1639452208366	Marionette	INFO	Listening on port 39217
+1639452208456	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1639452216064	Marionette	INFO	Stopped listening on port 39217
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639452337325	geckodriver	INFO	Listening on 127.0.0.1:59915
+1639452337328	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "47087" "-no-remote" "-profile" "/tmp/rust_mozprofileaXVaQW"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639452338597	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileaXVaQW/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:47087/devtools/browser/31037f28-2cfc-49c0-b3f6-74bf394f6ff5
+1639452340260	Marionette	INFO	Listening on port 46407
+1639452340288	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639452499703	Marionette	INFO	Stopped listening on port 46407
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639452598274	geckodriver	INFO	Listening on 127.0.0.1:47361
+1639452598278	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "49817" "-no-remote" "-profile" "/tmp/rust_mozprofile4QfNA8"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639452599590	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile4QfNA8/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49817/devtools/browser/bd63cdb2-7961-4fbf-a02b-801fa98d8f2c
+1639452601154	Marionette	INFO	Listening on port 45889
+1639452601249	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639452673722	geckodriver	INFO	Listening on 127.0.0.1:34695
+1639452673725	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "56185" "-no-remote" "-profile" "/tmp/rust_mozprofilezrqoJs"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639452674791	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilezrqoJs/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56185/devtools/browser/7246541d-26e0-4310-bc2d-db0c1da9dcf7
+1639452676384	Marionette	INFO	Listening on port 42705
+1639452676430	Marionette	INFO	Stopped listening on port 45889
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639452676507	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639452713932	geckodriver	INFO	Listening on 127.0.0.1:44939
+1639452713936	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "54717" "-no-remote" "-profile" "/tmp/rust_mozprofilenTWqfT"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639452715029	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilenTWqfT/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54717/devtools/browser/e509440e-bc3b-4813-9a77-f84b1a62fd4d
+1639452716803	Marionette	INFO	Listening on port 38395
+1639452716873	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639452717270	Marionette	INFO	Stopped listening on port 42705
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639452778442	Marionette	INFO	Stopped listening on port 38395
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639452783445	geckodriver	INFO	Listening on 127.0.0.1:44633
+1639452783449	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "48201" "-no-remote" "-profile" "/tmp/rust_mozprofiletU6Dnm"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639452784795	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofiletU6Dnm/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:48201/devtools/browser/cc8fee8d-57b1-4008-9db1-474230230037
+1639452786384	Marionette	INFO	Listening on port 35277
+1639452786499	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://fonts.googleapis.com/css?family=Lato:300 without a browsingContextID set
+1639452952378	Marionette	INFO	Stopped listening on port 35277
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639453068526	geckodriver	INFO	Listening on 127.0.0.1:58109
+1639453068531	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "35611" "-no-remote" "-profile" "/tmp/rust_mozprofilevbIB1k"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453070130	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilevbIB1k/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:35611/devtools/browser/05039616-5fa3-4e45-afdf-db4eb284bc7c
+1639453071748	Marionette	INFO	Listening on port 38291
+1639453071841	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639453136774	geckodriver	INFO	Listening on 127.0.0.1:57355
+1639453136778	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "60945" "-no-remote" "-profile" "/tmp/rust_mozprofileelrpyX"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453138212	Marionette	INFO	Marionette enabled
+1639453138746	Marionette	INFO	Stopped listening on port 38291
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileelrpyX/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60945/devtools/browser/da5fefcb-9085-496e-b463-6b646ea4beb3
+1639453139960	Marionette	INFO	Listening on port 35779
+1639453140033	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: resource://devtools/client/shared/demangle.js, line 0: Successfully compiled asm.js code (total compilation time 69ms)
+1639453290438	Marionette	INFO	Stopped listening on port 35779
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639453293659	geckodriver	INFO	Listening on 127.0.0.1:48791
+1639453293663	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "50865" "-no-remote" "-profile" "/tmp/rust_mozprofile43OqR3"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453295146	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile43OqR3/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50865/devtools/browser/515ea03b-64d7-4936-ae85-675e0af469ca
+1639453296708	Marionette	INFO	Listening on port 35361
+1639453296823	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639453309710	geckodriver	INFO	Listening on 127.0.0.1:46829
+1639453309715	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "52187" "-no-remote" "-profile" "/tmp/rust_mozprofileqrqGCf"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453311087	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileqrqGCf/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:52187/devtools/browser/8f9bebf0-f887-4711-999f-5d063efc2624
+1639453312807	Marionette	INFO	Listening on port 41065
+1639453312863	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639453313130	Marionette	INFO	Stopped listening on port 35361
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript error: resource://devtools/server/actors/network-monitor/network-event-actor.js, line 110: Error: Got a request https://fonts.googleapis.com/css?family=Lato:300 without a browsingContextID set
+1639453439076	geckodriver	INFO	Listening on 127.0.0.1:56501
+1639453439080	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "49049" "-no-remote" "-profile" "/tmp/rust_mozprofileKFjJSw"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453440571	Marionette	INFO	Marionette enabled
+1639453440926	Marionette	INFO	Stopped listening on port 41065
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileKFjJSw/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49049/devtools/browser/991a6c0e-dfe4-49cb-b108-90f16b705e7b
+1639453442284	Marionette	INFO	Listening on port 39873
+1639453442349	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639453469780	Marionette	INFO	Stopped listening on port 39873
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639453472541	geckodriver	INFO	Listening on 127.0.0.1:47647
+1639453472545	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "44553" "-no-remote" "-profile" "/tmp/rust_mozprofile0tQ7SI"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453473986	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile0tQ7SI/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:44553/devtools/browser/fd5daea1-2774-4013-9990-ded8dba8e97f
+1639453475545	Marionette	INFO	Listening on port 42849
+1639453475636	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639453590622	Marionette	INFO	Stopped listening on port 42849
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639453594108	geckodriver	INFO	Listening on 127.0.0.1:45489
+1639453594112	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "43597" "-no-remote" "-profile" "/tmp/rust_mozprofilelGsknF"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639453595606	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilelGsknF/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:43597/devtools/browser/b9ccbd43-8bc7-4e4b-9ee0-153ed1da69be
+1639453597184	Marionette	INFO	Listening on port 37819
+1639453597292	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639453616777	Marionette	INFO	Stopped listening on port 37819
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639491398663	geckodriver	INFO	Listening on 127.0.0.1:35783
+1639491399168	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "58695" "-no-remote" "-profile" "/tmp/rust_mozprofilewzdH55"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639491401628	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilewzdH55/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:58695/devtools/browser/9865b7c1-c57e-4ccf-b360-1c17169f17b7
+1639491403273	Marionette	INFO	Listening on port 46529
+1639491403361	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1639492458971	geckodriver	INFO	Listening on 127.0.0.1:53339
+1639492458976	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "38639" "-no-remote" "-profile" "/tmp/rust_mozprofile3QjTNq"
+1639492459926	Marionette	INFO	Stopped listening on port 46529
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639492460912	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile3QjTNq/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:38639/devtools/browser/7b93b314-b215-4e0e-8122-12d88cfd3172
+1639492462053	Marionette	INFO	Listening on port 44917
+1639492462468	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639492508918	geckodriver	INFO	Listening on 127.0.0.1:56463
+1639492508922	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "55977" "-no-remote" "-profile" "/tmp/rust_mozprofilezFYpws"
+1639492510262	Marionette	INFO	Stopped listening on port 44917
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639492511137	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilezFYpws/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:55977/devtools/browser/7cc56a91-9084-4cf1-9118-7f42ea401c2c
+1639492512716	Marionette	INFO	Listening on port 45345
+1639492512805	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1639493151371	geckodriver	INFO	Listening on 127.0.0.1:45459
+1639493151375	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "60197" "-no-remote" "-profile" "/tmp/rust_mozprofileehczmF"
+1639493152996	Marionette	INFO	Stopped listening on port 45345
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639493153704	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileehczmF/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60197/devtools/browser/a4a6feac-400e-461b-9770-1f366ab61442
+1639493155371	Marionette	INFO	Listening on port 35191
+1639493155446	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639493384496	Marionette	INFO	Stopped listening on port 35191
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639493386140	geckodriver	INFO	Listening on 127.0.0.1:59289
+1639493386144	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "56611" "-no-remote" "-profile" "/tmp/rust_mozprofilefujG2v"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639493388441	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilefujG2v/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56611/devtools/browser/898193b7-9b7d-4a20-b1d5-7b78244f72ed
+1639493389791	Marionette	INFO	Listening on port 35381
+1639493389907	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1639494487828	geckodriver	INFO	Listening on 127.0.0.1:32865
+1639494487832	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "38671" "-no-remote" "-profile" "/tmp/rust_mozprofileSXVPkx"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494490353	Marionette	INFO	Marionette enabled
+1639494490399	Marionette	INFO	Stopped listening on port 35381
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileSXVPkx/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:38671/devtools/browser/1fbf2c0f-a62c-4750-9929-a5a4878770c9
+1639494492111	Marionette	INFO	Listening on port 44587
+1639494492219	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494513596	geckodriver	INFO	Listening on 127.0.0.1:51849
+1639494513601	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "59983" "-no-remote" "-profile" "/tmp/rust_mozprofile6v4eac"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494515746	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile6v4eac/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:59983/devtools/browser/2bcb31b4-9217-4cf5-af12-3d270b70bcb6
+1639494517425	Marionette	INFO	Listening on port 32825
+1639494517482	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494557047	geckodriver	INFO	Listening on 127.0.0.1:44071
+1639494557051	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "41087" "-no-remote" "-profile" "/tmp/rust_mozprofileYO26Bz"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494559139	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileYO26Bz/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:41087/devtools/browser/5d1698eb-fc1f-4c34-8b67-fe708b0b0e51
+1639494560793	Marionette	INFO	Listening on port 40015
+1639494560848	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494716391	Marionette	INFO	Stopped listening on port 44587
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639494717555	Marionette	INFO	Stopped listening on port 32825
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639494719001	Marionette	INFO	Stopped listening on port 40015
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639494733228	geckodriver	INFO	Listening on 127.0.0.1:52801
+1639494733232	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "47425" "-no-remote" "-profile" "/tmp/rust_mozprofileNzuCHp"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494735332	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileNzuCHp/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:47425/devtools/browser/0575196a-4c72-4b3a-93f7-f928667b5c10
+1639494737017	Marionette	INFO	Listening on port 35509
+1639494737055	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494756913	geckodriver	INFO	Listening on 127.0.0.1:56673
+1639494756918	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "52533" "-no-remote" "-profile" "/tmp/rust_mozprofilehM3F2p"
+1639494758498	Marionette	INFO	Stopped listening on port 35509
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494759281	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilehM3F2p/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:52533/devtools/browser/529b9e10-237c-4582-aee3-4da137b91f44
+1639494761044	Marionette	INFO	Listening on port 36237
+1639494761081	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494803492	Marionette	INFO	Stopped listening on port 36237
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639494809280	geckodriver	INFO	Listening on 127.0.0.1:46239
+1639494809285	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "57955" "-no-remote" "-profile" "/tmp/rust_mozprofileEwxTFy"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494811800	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileEwxTFy/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57955/devtools/browser/e62efeaa-1716-43d6-8520-e25cd6c771d3
+1639494813490	Marionette	INFO	Listening on port 39427
+1639494813570	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494945856	geckodriver	INFO	Listening on 127.0.0.1:38437
+1639494945860	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "39419" "-no-remote" "-profile" "/tmp/rust_mozprofile1siBSY"
+1639494947687	Marionette	INFO	Stopped listening on port 39427
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494948012	Marionette	INFO	Marionette enabled
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile1siBSY/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:39419/devtools/browser/8c671375-bc6f-4249-9515-19ae239e73ab
+1639494949621	Marionette	INFO	Listening on port 41237
+1639494949726	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639494993194	geckodriver	INFO	Listening on 127.0.0.1:44629
+1639494993199	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "58323" "-no-remote" "-profile" "/tmp/rust_mozprofileRUkriq"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639494995618	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileRUkriq/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:58323/devtools/browser/f42cba93-d192-4c50-94bf-d531b0ad0cfa
+1639494997187	Marionette	INFO	Listening on port 40457
+1639494997272	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639494998104	Marionette	INFO	Stopped listening on port 41237
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639495041655	Marionette	INFO	Stopped listening on port 40457
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639495049787	geckodriver	INFO	Listening on 127.0.0.1:50819
+1639495049790	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "44919" "-no-remote" "-profile" "/tmp/rust_mozprofileNrtT4C"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639495051969	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileNrtT4C/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:44919/devtools/browser/090e5c6a-8061-47d4-a3ae-930d050834aa
+1639495053458	Marionette	INFO	Listening on port 37289
+1639495053555	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639495080012	Marionette	INFO	Stopped listening on port 37289
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639495943467	geckodriver	INFO	Listening on 127.0.0.1:56003
+1639495943471	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "33297" "-no-remote" "-profile" "/tmp/rust_mozprofileNTz8gH"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639495944575	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileNTz8gH/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:33297/devtools/browser/ee1a9522-88e6-4fc3-9818-2499b69d5b22
+1639495946259	Marionette	INFO	Listening on port 44335
+1639495946323	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639496207478	geckodriver	INFO	Listening on 127.0.0.1:39095
+1639496207483	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "40147" "-no-remote" "-profile" "/tmp/rust_mozprofile9PsQtn"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639496208683	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile9PsQtn/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:40147/devtools/browser/57fd25c1-014d-4dc5-a328-19604ef7aaed
+1639496210418	Marionette	INFO	Listening on port 37603
+1639496210530	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639496211363	Marionette	INFO	Stopped listening on port 44335
+JavaScript error: resource://devtools/shared/protocol/Front.js, line 106: Error: Connection closed, pending request to server0.conn0.windowGlobal2147483652/domnode595, type setNodeValue failed
+
+Request stack:
+request@resource://devtools/shared/protocol/Front.js:292:14
+generateRequestMethods/</frontProto[name]@resource://devtools/shared/protocol/Front/FrontClassWithSpec.js:46:19
+showTextEditor/done/</<@resource://devtools/client/inspector/markup/views/text-editor.js:101:25
+do@resource://devtools/client/shared/undo.js:70:16
+endBatch@resource://devtools/client/shared/undo.js:81:11
+do@resource://devtools/client/shared/undo.js:93:10
+showTextEditor/done/<@resource://devtools/client/inspector/markup/views/text-editor.js:99:31
+
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639496235447	Marionette	INFO	Stopped listening on port 37603
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639496237383	geckodriver	INFO	Listening on 127.0.0.1:45619
+1639496237388	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "33769" "-no-remote" "-profile" "/tmp/rust_mozprofileofORyr"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639496238551	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileofORyr/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:33769/devtools/browser/4020328a-065a-4fb7-85d8-f86c51b65474
+1639496240370	Marionette	INFO	Listening on port 44013
+1639496240458	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639496304383	Marionette	INFO	Stopped listening on port 44013
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639496307046	geckodriver	INFO	Listening on 127.0.0.1:53543
+1639496307050	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "60763" "-no-remote" "-profile" "/tmp/rust_mozprofileOHBHFa"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639496308503	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileOHBHFa/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60763/devtools/browser/ec36ae56-a056-4ecd-bb57-f1bc8ffd4961
+1639496310093	Marionette	INFO	Listening on port 41595
+1639496310207	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639496417410	Marionette	INFO	Stopped listening on port 41595
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639496420515	geckodriver	INFO	Listening on 127.0.0.1:60539
+1639496420520	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "49345" "-no-remote" "-profile" "/tmp/rust_mozprofilekAmVzP"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639496421990	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilekAmVzP/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49345/devtools/browser/c234488a-a514-4f77-a492-cbaa4e00fb57
+1639496423734	Marionette	INFO	Listening on port 39865
+1639496423794	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+1639496549042	geckodriver	INFO	Listening on 127.0.0.1:58363
+1639496549048	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "48637" "-no-remote" "-profile" "/tmp/rust_mozprofile7szo7L"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1639496549923	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile7szo7L/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:48637/devtools/browser/83d47ba3-4f5c-4c39-9395-2c7846a87b70
+1639496551552	Marionette	INFO	Listening on port 46197
+1639496551588	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+JavaScript warning: https://js.arcgis.com/3.6/, line 34: unreachable code after return statement
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1639496820488	Marionette	INFO	Stopped listening on port 39865
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1639496821973	Marionette	INFO	Stopped listening on port 46197
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/fxmonitor-breaches Signature failed  TypeError: NetworkError: Network request failed
+console.error: services.settings: 
+  Message: TypeError: NetworkError: Network request failed
+  Stack:
+    fetch/</request.onerror@resource://services-settings/Utils.jsm:131:26
+
+console.warn: services.settings: main/search-telemetry sync interrupted by shutdown
+console.warn: services.settings: main/websites-with-shared-credential-backends sync interrupted by shutdown
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
