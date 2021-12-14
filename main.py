@@ -21,3 +21,10 @@ sleep(2)
 assessed_value = driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Assessed Value')]/following-sibling::td").text
 appraised_value = driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Appraised Value')]/following-sibling::td").text
 tax = driver.find_element(By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]").find_element(By.XPATH, "..").text.split('Estimated Taxes Without Exemptions: ')[1]
+assessed_value = float(assessed_value.replace(',', '').replace('$', ''))
+appraised_value = float(appraised_value.replace(',', '').replace('$', ''))
+tax = float(tax.replace(',', '').replace('$', ''))
+cursor.execute(f"UPDATE propertydata SET assessed={assessed_value}, appraised={appraised_value}, tax={tax} WHERE name='{house_name}'")
+db.commit()
+cursor.close()
+db.close()
