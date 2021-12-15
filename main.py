@@ -4,10 +4,13 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 import sqlite3
 from datetime import datetime
+from selenium.webdriver.firefox.options import Options
 
 db = sqlite3.connect('database.db')
 cursor = db.cursor()
-driver = webdriver.Firefox()
+options = Options()
+options.headless = True
+driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name FROM propertydata;')
 houses = [house[0] for house in cursor.fetchall()]
 for house in houses:
