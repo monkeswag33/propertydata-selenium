@@ -9,7 +9,7 @@ from selenium.webdriver.firefox.options import Options
 db = sqlite3.connect('database.db')
 cursor = db.cursor()
 options = Options()
-options.headless = False
+options.headless = True
 driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name FROM propertydata;')
 houses = [house[0] for house in cursor.fetchall()]
