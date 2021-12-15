@@ -28,7 +28,7 @@ for house in houses:
     appraised_value = float(appraised_value.replace(',', '').replace('$', ''))
     tax = float(tax.replace(',', '').replace('$', ''))
     time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    cursor.execute(f"UPDATE propertydata SET assessed={assessed_value}, appraised={appraised_value}, tax={tax}, last_updated='{time}' WHERE name='{house}'")
+    cursor.execute(f"UPDATE propertydata SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax}, last_updated='{time}' WHERE name='{house}'")
 db.commit()
 cursor.close()
 db.close()

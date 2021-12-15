@@ -2,10 +2,13 @@ DROP TABLE IF EXISTS propertydata;
 CREATE TABLE IF NOT EXISTS "propertydata" (
 	"id"	INTEGER NOT NULL UNIQUE,
 	"name"	TEXT NOT NULL,
-	"appraised"	REAL,
-	"assessed"	REAL,
-	"tax"	REAL,
-    "last_updated" TEXT,
+	"current_appraised"	REAL,
+	"current_assessed"	REAL,
+	"current_tax"	REAL,
+	"last_appraised" REAL,
+	"last_assessed" REAL,
+	"last_tax" REAL,
+        "last_updated" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 INSERT INTO propertydata (name) VALUES
