@@ -7,6 +7,7 @@ from datetime import datetime
 from selenium.webdriver.firefox.options import Options
 
 def bcad(driver, house):
+    print("Searching in BCAD")
     driver.get('https://esearch.brazoscad.org')
     sleep(1)
     textbox = driver.find_element(By.ID, "keywords")
@@ -24,10 +25,22 @@ def bcad(driver, house):
     tax = driver.find_element(By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]").find_element(By.XPATH, "..").text.split('Estimated Taxes Without Exemptions: ')[1]
     return assessed_value, appraised_value, tax
 
+def wcad(driver, house):
+    print("Searching in WCAD")
+    driver.get('https://search.wcad.org/')
+    sleep(1)
+    textbox = driver.find_element(By.ID, "SearchText")
+    textbox.send_keys(house)
+    textbox.send_keys(Keys.RETURN)
+    print(f'Searching for {house}')
+    sleep(3)
+    driver.find_element(By.XPATH, "//td[contains(text(), '{}')]".format(house.upper())).click()
+    return None, None, None
+
 db = sqlite3.connect('/home/ishank/propertydata-selenium/database.db')
 cursor = db.cursor()
 options = Options()
-options.headless = True
+options.headless = False
 driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name, cad FROM propertydata;')
 houses = [house for house in cursor.fetchall()]
@@ -38,8 +51,10 @@ websites = {
 print('Retrieved data from database')
 for house in houses:
     name = house[0]
+    print(name)
     cad = house[1]
-    assessed_value, appraised_value, tax = bcad(driver, name)
+    assessed_value, appraised_value, tax = bcad(driver, name) if cad == 'b' else wcad(driver, name)
+    exit()
     # driver.get('https://esearch.brazoscad.org')
     # sleep(1)
     # textbox = driver.find_element(By.ID, "keywords")
