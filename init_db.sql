@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS "propertydata" (
         "last_updated" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
-INSERT INTO propertydata (name, cad) VALUES
-('802 San Pedro', 'bcad'), ('800 San Pedro', 'bcad'),
-('706 San Pedro', 'bcad'), ('704 San Pedro', 'bcad'),
-('702 San Pedro', 'bcad'), ('700 San Pedro', 'bcad');
+INSERT INTO propertydata (name, ) VALUES
+('802 San Pedro', 'b'), ('800 San Pedro', 'b'),
+('706 San Pedro', 'b'), ('704 San Pedro', 'b'),
+('702 San Pedro', 'b'), ('700 San Pedro', 'b');
