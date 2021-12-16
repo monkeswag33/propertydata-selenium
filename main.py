@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime
 from selenium.webdriver.firefox.options import Options
 
-db = sqlite3.connect('database.db')
+db = sqlite3.connect('/home/ishank/propertydata-selenium/database.db')
 cursor = db.cursor()
 options = Options()
 options.headless = True
