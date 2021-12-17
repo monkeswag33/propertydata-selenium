@@ -5,6 +5,9 @@ from time import sleep
 import sqlite3
 from datetime import datetime
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 def bcad(driver, house):
     print("Searching in BCAD")
@@ -35,6 +38,16 @@ def wcad(driver, house):
     print(f'Searching for {house}')
     sleep(3)
     driver.find_element(By.XPATH, "//td[contains(text(), '{}')]".format(house.upper())).click()
+    print('Clicked on link')
+    dropdown = Select(driver.find_element(By.ID, "dnn_ctr1460_View_ddTaxYears"))
+    dropdown.select_by_visible_text('2021')
+    sleep(1)
+    appraised_value = driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue").text
+    assessed_value = driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAssessedValueRP").text
+    driver.find_element(By.ID, "tdDropDownLinks").click()
+    driver.find_element(By.XPATH, "//a[contains(text(), 'Tax Office')]").click()
+    sleep(15)
+    print(driver.page_source.count('1,181'))
     return None, None, None
 
 db = sqlite3.connect('/home/ishank/propertydata-selenium/database.db')
