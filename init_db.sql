@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS "propertydata" (
 );
 INSERT INTO propertydata (name, cad) VALUES
 ('212 Cloud', 'w'), ('118 Brown', 'w'),
-('103 Axis Deer', 'w'), ('105 Orchard'),
+('103 Axis Deer', 'w'), ('105 Orchard', 'w'),
 ('6018 Andross', 'w'), ('118 Wegstrom', 'w'),
 ('313 Ross', 'w'), ('302 Quail', 'w'),
 ('403 Kates', 'w'), ('107 Orchard', 'w'),
