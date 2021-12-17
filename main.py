@@ -53,7 +53,7 @@ def wcad(driver, house):
     print(driver.page_source.count('1,181'))
     return None, None, None
 
-db = sqlite3.connect(os.getenv('DATABASE_LOCATION')
+db = sqlite3.connect(os.getenv('DATABASE_LOCATION'))
 cursor = db.cursor()
 options = Options()
 options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
