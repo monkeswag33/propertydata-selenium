@@ -8,6 +8,9 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 def bcad(driver, house):
     print("Searching in BCAD")
@@ -50,10 +53,10 @@ def wcad(driver, house):
     print(driver.page_source.count('1,181'))
     return None, None, None
 
-db = sqlite3.connect('/home/ishank/propertydata-selenium/database.db')
+db = sqlite3.connect(os.getenv('DATABASE_LOCATION')
 cursor = db.cursor()
 options = Options()
-options.headless = False
+options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
 driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name, cad FROM propertydata;')
 houses = [house for house in cursor.fetchall()]
