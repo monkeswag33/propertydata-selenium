@@ -5,11 +5,14 @@ from time import sleep
 import sqlite3
 from datetime import datetime
 from selenium.webdriver.firefox.options import Options
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
-db = sqlite3.connect('/home/ishank/propertydata-selenium/database.db')
+db = sqlite3.connect(os.getenv('DATABASE_LOCATION'))
 cursor = db.cursor()
 options = Options()
-options.headless = True
+options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
 driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name FROM propertydata;')
 houses = [house[0] for house in cursor.fetchall()]
