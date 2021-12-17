@@ -20,13 +20,12 @@ def bcad(driver, house):
     textbox.send_keys(house)
     textbox.send_keys(Keys.RETURN)
     print(f'Searching for {house}')
-    sleep(1.5)
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, "view-list")))
     driver.find_element(By.ID, "view-list").click()
     sleep(0.5)
     driver.find_element(By.XPATH, f"//a[contains(text(), '{house.upper()}')]").click()
     sleep(2)
     print('Clicked on link')
-    #property_values = driver.find_element(By.XPATH, "//*[contains(text(), 'Assessed Value')]").text
     assessed_value = driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Assessed Value')]/following-sibling::td").text
     print("Got assessed value")
     appraised_value = driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Appraised Value')]/following-sibling::td").text
