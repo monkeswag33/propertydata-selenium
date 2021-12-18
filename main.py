@@ -20,8 +20,12 @@ def bcad(driver, house):
     textbox.send_keys(house)
     textbox.send_keys(Keys.RETURN)
     print(f'Searching for {house}')
-    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.ID, "view-list")))
-    driver.find_element(By.ID, "view-list").click()
+    try:
+        WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.ID, "view-list")))
+    except:
+        pass
+    finally:
+        driver.find_element(By.ID, "view-list").click()
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"//a[contains(text(), '{house.upper()}')]")))
     driver.find_element(By.XPATH, f"//a[contains(text(), '{house.upper()}')]").click()
     print('Clicked on link')
