@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 import sqlite3
 from datetime import datetime
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -42,7 +42,7 @@ def wcad(driver, house):
     textbox.send_keys(house)
     textbox.send_keys(Keys.RETURN)
     print(f'Searching for {house}')
-    sleep(1)
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//td[contains(text(), '{}')]".format(house.upper()))))
     driver.find_element(By.XPATH, "//td[contains(text(), '{}')]".format(house.upper())).click()
     print('Clicked on link')
     dropdown = Select(driver.find_element(By.ID, "dnn_ctr1460_View_ddTaxYears"))
@@ -60,7 +60,9 @@ def wcad(driver, house):
     sleep(1)
     driver.switch_to.window(driver.window_handles[1])
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_tdPMCurrentAmountDue")))
-    tax = driver.find_element(By.ID, 'dnn_ctr377_View_tdPMCurrentAmountDue').text
+    tax = ''
+    while not tax:
+        tax = driver.find_element(By.ID, 'dnn_ctr377_View_tdPMCurrentAmountDue').text
     print("Got tax")
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
@@ -70,7 +72,7 @@ db = sqlite3.connect(os.getenv('DATABASE_LOCATION'))
 cursor = db.cursor()
 options = Options()
 options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name, cad FROM propertydata;')
 houses = [house for house in cursor.fetchall()]
 websites = {
