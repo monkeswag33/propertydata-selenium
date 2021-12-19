@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS "propertydata" (
 	"last_appraised" REAL,
 	"last_assessed" REAL,
 	"last_tax" REAL,
-        "last_updated" TEXT,
+	"zillow_fmv" REAL,
+	"redfin_fmv" REAL,
+	"last_updated" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 INSERT INTO propertydata (name, cad) VALUES

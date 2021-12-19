@@ -37,6 +37,9 @@ def bcad(driver, house):
         tax = driver.find_element(By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]").find_element(By.XPATH, "..").text.split('Estimated Taxes Without Exemptions: ')[1]
         print("Got tax")
         return assessed_value, appraised_value, tax
+    except KeyboardInterrupt:
+        driver.quit()
+        exit()
     except:
         print("Error, Retrying")
         return bcad(driver, house)
@@ -77,6 +80,9 @@ def wcad(driver, house):
         driver.close()
         driver.switch_to.window(driver.window_handles[0])
         return appraised_value, assessed_value, tax
+    except KeyboardInterrupt:
+        driver.quit()
+        exit()
     except:
         print("Error, Retrying")
         return wcad(driver, house)
@@ -107,6 +113,8 @@ for house in houses:
     time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     if cad == 'w':
         fmv_redfin = redfin_fmv(client, f'{name} Hutto')
+        cursor.execute(f'UPDATE propertydata SET redfin_fmv={fmv_redfin}')
+        
     last_assessed, last_appraised, last_tax = cursor.execute(f'SELECT current_assessed, current_appraised, current_tax FROM propertydata WHERE name = "{name}";').fetchone()
     cursor.execute(f"UPDATE propertydata SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax}, last_updated='{time}' WHERE name='{name}'")
     if last_assessed and last_appraised and tax:
