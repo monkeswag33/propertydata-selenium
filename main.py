@@ -1,13 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from time import sleep
-import sqlite3
-from datetime import datetime
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from redfin import Redfin
+from time import sleep
+import sqlite3
+from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
 import os
@@ -80,6 +81,13 @@ def wcad(driver, house):
         print("Error, Retrying")
         return wcad(driver, house)
 
+def redfin_fmv(client, house):
+    response = client.search(house)
+    url = response['payload']['exactMatch']['url']
+    initial_info = client.initial_info(url)['payload']
+    avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+    return avm_details['payload']['predictedValue']
+
 db = sqlite3.connect(os.getenv('DATABASE_LOCATION'))
 cursor = db.cursor()
 options = Options()
@@ -87,10 +95,7 @@ options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
 driver = webdriver.Firefox(options=options)
 cursor.execute('SELECT name, cad FROM propertydata;')
 houses = [house for house in cursor.fetchall()]
-websites = {
-    'b': 'https://esearch.brazoscad.org',
-    'w': 'https://search.wcad.org'
-}
+client = Redfin()
 print('Retrieved data from database')
 for house in houses:
     name = house[0]
@@ -100,6 +105,8 @@ for house in houses:
     appraised_value = float(appraised_value.replace(',', '').replace('$', ''))
     tax = float(tax.replace(',', '').replace('$', ''))
     time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    if cad == 'w':
+        fmv_redfin = redfin_fmv(client, f'{name} Hutto')
     last_assessed, last_appraised, last_tax = cursor.execute(f'SELECT current_assessed, current_appraised, current_tax FROM propertydata WHERE name = "{name}";').fetchone()
     cursor.execute(f"UPDATE propertydata SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax}, last_updated='{time}' WHERE name='{name}'")
     if last_assessed and last_appraised and tax:
