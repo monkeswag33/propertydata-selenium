@@ -20,6 +20,7 @@ def bcad(driver, house):
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "keywords")))
         textbox = driver.find_element(By.ID, "keywords")
         textbox.send_keys(house)
+        sleep(1)
         textbox.send_keys(Keys.RETURN)
         print(f'Searching for {house}')
         WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "view-list")))
@@ -87,12 +88,19 @@ def wcad(driver, house):
         print("Error, Retrying")
         return wcad(driver, house)
 
-def redfin_fmv(client, house):
+def fmv(driver, client, house):
+    house = house + ' Hutto'
     response = client.search(house)
     url = response['payload']['exactMatch']['url']
     initial_info = client.initial_info(url)['payload']
     avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
-    return avm_details['payload']['predictedValue']
+    driver.get('https://trulia.com/')
+    textbox = driver.find_element(By.ID, 'banner-search')
+    textbox.send_keys('212 Cloud RD Hutto')
+    textbox.send_keys(Keys.RETURN)
+    sleep(3)
+    trulia_fmv = driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
+    return (avm_details['payload']['predictedValue'], trulia_fmv)
 
 db = sqlite3.connect(os.getenv('DATABASE_LOCATION'))
 cursor = db.cursor()
@@ -112,8 +120,10 @@ for house in houses:
     tax = float(tax.replace(',', '').replace('$', ''))
     time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     if cad == 'w':
-        fmv_redfin = redfin_fmv(client, f'{name} Hutto')
-        cursor.execute(f'UPDATE propertydata SET redfin_fmv={fmv_redfin}')
+        redfin_fmv, zillow_fmv = fmv(driver, client, name)
+        zillow_fmv = float(zillow_fmv.replace(',', '').replace('$', ''))
+        average_fmv = (zillow_fmv + redfin_fmv) / 2
+        cursor.execute(f'UPDATE propertydata SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name="{name}";')
         
     last_assessed, last_appraised, last_tax = cursor.execute(f'SELECT current_assessed, current_appraised, current_tax FROM propertydata WHERE name = "{name}";').fetchone()
     cursor.execute(f"UPDATE propertydata SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax}, last_updated='{time}' WHERE name='{name}'")

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS "propertydata" (
 	"last_tax" REAL,
 	"zillow_fmv" REAL,
 	"redfin_fmv" REAL,
+	"avg_fmv" REAL,
 	"last_updated" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
