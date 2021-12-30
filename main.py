@@ -126,11 +126,9 @@ for house in houses:
     cad = house[1]
     assessed_appraised_tax = [None, None, None]
     bcad(driver, name, assessed_appraised_tax, 5) if cad == 'b' else wcad(driver, name, assessed_appraised_tax, 5)
-    print(assessed_appraised_tax)
-    continue
-    assessed_value = float(assessed_value.replace(',', '').replace('$', ''))
-    appraised_value = float(appraised_value.replace(',', '').replace('$', ''))
-    tax = float(tax.replace(',', '').replace('$', ''))
+    assessed_value = float(assessed_appraised_tax[0].replace(',', '').replace('$', ''))
+    appraised_value = float(assessed_appraised_tax[1].replace(',', '').replace('$', ''))
+    tax = float(assessed_appraised_tax[2].replace(',', '').replace('$', ''))
     time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     if cad == 'w':
         redfin_fmv, zillow_fmv = fmv(driver, client, name)
