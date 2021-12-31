@@ -1,19 +1,18 @@
 DROP TABLE IF EXISTS propertydata;
-CREATE TABLE IF NOT EXISTS "propertydata" (
-	"id"	INTEGER NOT NULL UNIQUE,
+CREATE TABLE "propertydata" (
+	"id"	SERIAL PRIMARY KEY,
 	"name"	TEXT NOT NULL,
 	"cad" TEXT NOT NULL,
-	"current_appraised"	REAL,
-	"current_assessed"	REAL,
-	"current_tax"	REAL,
-	"last_appraised" REAL,
-	"last_assessed" REAL,
-	"last_tax" REAL,
-	"zillow_fmv" REAL,
-	"redfin_fmv" REAL,
-	"avg_fmv" REAL,
-	"last_updated" TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT)
+	"current_appraised"	INTEGER,
+	"current_assessed"	INTEGER,
+	"current_tax"	INTEGER,
+	"last_appraised" INTEGER,
+	"last_assessed" INTEGER,
+	"last_tax" INTEGER,
+	"zillow_fmv" INTEGER,
+	"redfin_fmv" INTEGER,
+	"avg_fmv" INTEGER,
+	"last_updated" TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
 );
 INSERT INTO propertydata (name, cad) VALUES
 ('212 Cloud RD', 'w'), ('118 Brown ST', 'w'),

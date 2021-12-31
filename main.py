@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from redfin import Redfin
 from time import sleep
-import sqlite3
+import psycopg2
 from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
@@ -112,12 +112,13 @@ def fmv(driver, client, house):
     print(trulia_fmv)
     return (avm_details['payload']['predictedValue'], trulia_fmv)
 
-db = sqlite3.connect(os.getenv('DATABASE_LOCATION'))
+db = psycopg2.connect(os.getenv('POSTGRES_URI'))
+table_name = ('prod_' if os.getenv('ENVIRONMENT') == 'PROD' else 'dev_') + 'propertydata'
 cursor = db.cursor()
 options = Options()
 options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
 driver = webdriver.Firefox(options=options)
-cursor.execute('SELECT name, cad FROM propertydata;')
+cursor.execute(f'SELECT name, cad FROM {table_name};')
 houses = [house for house in cursor.fetchall()]
 client = Redfin()
 print('Retrieved data from database')
@@ -134,12 +135,12 @@ for house in houses:
         redfin_fmv, zillow_fmv = fmv(driver, client, name)
         zillow_fmv = float(zillow_fmv.replace(',', '').replace('$', ''))
         average_fmv = (zillow_fmv + redfin_fmv) / 2
-        cursor.execute(f'UPDATE propertydata SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name="{name}";')
+        cursor.execute(f'UPDATE {table_name} SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name="{name}";')
         
     last_assessed, last_appraised, last_tax = cursor.execute(f'SELECT current_assessed, current_appraised, current_tax FROM propertydata WHERE name = "{name}";').fetchone()
-    cursor.execute(f"UPDATE propertydata SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax}, last_updated='{time}' WHERE name='{name}'")
+    cursor.execute(f"UPDATE {table_name} SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax} WHERE name='{name}'")
     if last_assessed and last_appraised and tax:
-        cursor.execute(f'UPDATE propertydata SET last_assessed={last_assessed}, last_appraised={last_appraised}, last_tax={last_tax} WHERE name = "{name}";')
+        cursor.execute(f'UPDATE {table_name} SET last_assessed={last_assessed}, last_appraised={last_appraised}, last_tax={last_tax} WHERE name = "{name}";')
 db.commit()
 cursor.close()
 db.close()
