@@ -47,7 +47,7 @@ def bcad(driver, house, assessed_appraised_tax, max_tries, tries=0):
     except Exception as e:
         print(e)
         print("Error, Retrying")
-        bcad(driver, house, max_tries, tries, assessed_appraised_tax)
+        bcad(driver, house, assessed_appraised_tax, max_tries, tries)
 
 def wcad(driver, house, assessed_appraised_tax, max_tries, tries=0):
     if tries >= max_tries:
