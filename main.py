@@ -102,6 +102,7 @@ def fmv(driver, client, house):
     url = response['payload']['exactMatch']['url']
     initial_info = client.initial_info(url)['payload']
     avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+    print("Got Redfin FMV")
     driver.get('https://trulia.com/')
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
     textbox = driver.find_element(By.ID, 'banner-search')
@@ -109,11 +110,12 @@ def fmv(driver, client, house):
     textbox.send_keys(Keys.RETURN)
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
     trulia_fmv = driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
-    print(trulia_fmv)
+    print("Got Trulia FMV")
     return (avm_details['payload']['predictedValue'], trulia_fmv)
 
 db = psycopg2.connect(os.getenv('POSTGRES_URI'))
 table_name = ('prod_' if os.getenv('ENVIRONMENT') == 'PROD' else 'dev_') + 'propertydata'
+print(table_name)
 cursor = db.cursor()
 options = Options()
 options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
@@ -135,12 +137,13 @@ for house in houses:
         redfin_fmv, zillow_fmv = fmv(driver, client, name)
         zillow_fmv = float(zillow_fmv.replace(',', '').replace('$', ''))
         average_fmv = (zillow_fmv + redfin_fmv) / 2
-        cursor.execute(f'UPDATE {table_name} SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name="{name}";')
+        cursor.execute(f"UPDATE {table_name} SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name='{name}';")
         
-    last_assessed, last_appraised, last_tax = cursor.execute(f'SELECT current_assessed, current_appraised, current_tax FROM propertydata WHERE name = "{name}";').fetchone()
+    cursor.execute(f"SELECT current_assessed, current_appraised, current_tax FROM {table_name} WHERE name = '{name}';")
+    last_assessed, last_appraised, last_tax = cursor.fetchone()
     cursor.execute(f"UPDATE {table_name} SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax} WHERE name='{name}'")
     if last_assessed and last_appraised and tax:
-        cursor.execute(f'UPDATE {table_name} SET last_assessed={last_assessed}, last_appraised={last_appraised}, last_tax={last_tax} WHERE name = "{name}";')
+        cursor.execute(f"UPDATE {table_name} SET last_assessed={last_assessed}, last_appraised={last_appraised}, last_tax={last_tax} WHERE name = '{name}';")
 db.commit()
 cursor.close()
 db.close()

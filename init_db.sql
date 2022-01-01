@@ -1,20 +1,21 @@
-DROP TABLE IF EXISTS propertydata;
-CREATE TABLE "propertydata" (
-	"id"	SERIAL PRIMARY KEY,
-	"name"	TEXT NOT NULL,
-	"cad" TEXT NOT NULL,
-	"current_appraised"	INTEGER,
-	"current_assessed"	INTEGER,
-	"current_tax"	INTEGER,
-	"last_appraised" INTEGER,
-	"last_assessed" INTEGER,
-	"last_tax" INTEGER,
-	"zillow_fmv" INTEGER,
-	"redfin_fmv" INTEGER,
-	"avg_fmv" INTEGER,
-	"last_updated" TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
+\c propertydata_selenium
+DROP TABLE IF EXISTS prod_propertydata, dev_propertydata;
+CREATE TABLE prod_propertydata (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL,
+	cad TEXT NOT NULL,
+	current_appraised FLOAT,
+	current_assessed FLOAT,
+	current_tax	FLOAT,
+	last_appraised FLOAT,
+	last_assessed FLOAT,
+	last_tax FLOAT,
+	zillow_fmv FLOAT,
+	redfin_fmv FLOAT,
+	avg_fmv FLOAT,
+	last_updated TIMESTAMP WITHOUT TIME ZONE
 );
-INSERT INTO propertydata (name, cad) VALUES
+INSERT INTO prod_propertydata (name, cad) VALUES
 ('212 Cloud RD', 'w'), ('118 Brown ST', 'w'),
 ('103 Axis Deer TRL', 'w'), ('105 Orchard WAY', 'w'),
 ('6018 Andross CT', 'w'), ('118 Wegstrom ST', 'w'),
@@ -25,3 +26,4 @@ INSERT INTO propertydata (name, cad) VALUES
 ('802 San Pedro', 'b'), ('800 San Pedro', 'b'),
 ('706 San Pedro', 'b'), ('704 San Pedro', 'b'),
 ('702 San Pedro', 'b'), ('700 San Pedro', 'b');
+CREATE TABLE dev_propertydata AS TABLE prod_propertydata;
