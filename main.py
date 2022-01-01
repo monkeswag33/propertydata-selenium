@@ -80,10 +80,14 @@ def wcad(driver, house, assessed_appraised_tax, max_tries, tries=0):
         print("Clicked on tax office")
         sleep(1)
         driver.switch_to.window(driver.window_handles[1])
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_tdPMCurrentAmountDue")))
-        tax = ''
-        while not tax:
-            tax = driver.find_element(By.ID, 'dnn_ctr377_View_tdPMCurrentAmountDue').text
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_divBillDetails")))
+        div = driver.find_element(By.ID, "dnn_ctr377_View_divBillDetails")
+        div = div.find_elements(By.TAG_NAME, "div")[0]
+        table = div.find_elements(By.TAG_NAME, "table")[1]
+        tbody = table.find_element(By.TAG_NAME, "tbody")
+        tr = tbody.find_elements(By.TAG_NAME, "tr")[-1]
+        tax = ""
+        while not tax: tax = tr.find_elements(By.TAG_NAME, "td")[1].text
         assessed_appraised_tax[2] = tax
         print("Got tax")
         driver.close()
@@ -96,12 +100,18 @@ def wcad(driver, house, assessed_appraised_tax, max_tries, tries=0):
         print("Error, Retrying")
         wcad(driver, house, assessed_appraised_tax, max_tries, tries)
 
-def fmv(driver, client, house):
+def fmv(driver, client, house, retries=5):
     house = house + ' Hutto'
-    response = client.search(house)
-    url = response['payload']['exactMatch']['url']
-    initial_info = client.initial_info(url)['payload']
-    avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+    for i in range(retries):
+        try:
+            response = client.search(house)
+            url = response['payload']['exactMatch']['url']
+            initial_info = client.initial_info(url)['payload']
+            avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+        except ConnectionError:
+            print("Connection Error, Retrying")
+            continue
+        break
     print("Got Redfin FMV")
     driver.get('https://trulia.com/')
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
@@ -138,12 +148,13 @@ for house in houses:
         zillow_fmv = float(zillow_fmv.replace(',', '').replace('$', ''))
         average_fmv = (zillow_fmv + redfin_fmv) / 2
         cursor.execute(f"UPDATE {table_name} SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name='{name}';")
-        
+        print('Updated FMV')
     cursor.execute(f"SELECT current_assessed, current_appraised, current_tax FROM {table_name} WHERE name = '{name}';")
     last_assessed, last_appraised, last_tax = cursor.fetchone()
     cursor.execute(f"UPDATE {table_name} SET current_assessed={assessed_value}, current_appraised={appraised_value}, current_tax={tax} WHERE name='{name}'")
     if last_assessed and last_appraised and tax:
         cursor.execute(f"UPDATE {table_name} SET last_assessed={last_assessed}, last_appraised={last_appraised}, last_tax={last_tax} WHERE name = '{name}';")
+    print(f"Updated {name}")
 db.commit()
 cursor.close()
 db.close()
