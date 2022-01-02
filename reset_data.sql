@@ -1,4 +1,4 @@
-UPDATE propertydata
+UPDATE dev_propertydata
 SET current_assessed=null,
     current_appraised=null,
     current_tax=null,
