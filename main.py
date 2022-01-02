@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from redfin import Redfin
 from time import sleep
 import psycopg2
-from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
 import os
@@ -114,7 +113,7 @@ def wcad(driver, house, assessed_appraised_tax, max_tries):
         while tries <= max_tries:
             try:
                 WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue")))
-                appraiseds = driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue").text
+                appraised = driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue").text
                 assessed_appraised_tax['appraised_value'] = appraised
                 print("Got appraised value")
                 break
