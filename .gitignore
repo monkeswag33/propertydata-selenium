@@ -2,3 +2,4 @@
 geckodriver.log
 logs/
 database.db
+__pycache__
