@@ -1,7 +1,7 @@
 from main import wcad, bcad, fmv, init_programs
 import pytest
 
-driver, db, cursor, client = init_programs()
+driver, client = init_programs()
 houses = {
     'b': [
         "700 San Pedro",
