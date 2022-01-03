@@ -50,4 +50,4 @@ def test_wcad(house):
 
 @pytest.mark.parametrize("house", houses['w'])
 def test_fmv(house):
-    print(house)
+    assert None not in fmv(driver, client, house, 5)
