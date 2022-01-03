@@ -30,7 +30,7 @@ def bcad(driver, house, assessed_appraised_tax, max_tries):
                 WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, f"//a[contains(text(), '{house.upper()}')]")))
                 driver.find_element(By.XPATH, f"//a[contains(text(), '{house.upper()}')]").click()
                 print('Clicked on link')
-                break
+                return True
             except:
                 print('Error getting page info, Retrying')
                 tries += 1
@@ -76,10 +76,10 @@ def bcad(driver, house, assessed_appraised_tax, max_tries):
                 sleep(1)
                 print('Error getting tax value, Retrying')
                 tries += 1
-    get_house_info(max_tries)
-    assessed_value(max_tries)
-    appraised_value(max_tries)
-    tax(max_tries)
+    if get_house_info(max_tries):
+        assessed_value(max_tries)
+        appraised_value(max_tries)
+        tax(max_tries)
 
 def wcad(driver, house, assessed_appraised_tax, max_tries):
     print("Searching in WCAD")
@@ -194,12 +194,14 @@ def main():
     print('Retrieved data from database')
     for house in houses:
         name = house[0]
+        print(name)
         cad = house[1]
         assessed_appraised_tax = {
             'assessed_value': None,
             'appraised_value': None,
             'tax': None
         }
+        if cad == 'w': continue
         bcad(driver, name, assessed_appraised_tax, 5) if cad == 'b' else wcad(driver, name, assessed_appraised_tax, 5)
         print(assessed_appraised_tax)
         if assessed_appraised_tax['assessed_value']: assessed_appraised_tax['assessed_value'] = float(assessed_appraised_tax['assessed_value'].replace(',', '').replace('$', ''))
