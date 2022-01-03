@@ -177,16 +177,16 @@ def fmv(driver, client, house, retries=5):
     return (avm_details['payload']['predictedValue'], trulia_fmv)
 
 def init_programs():
-    db = psycopg2.connect(os.getenv('POSTGRES_URI'))
-    cursor = db.cursor()
     options = Options()
     options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
     driver = webdriver.Firefox(options=options)
     client = Redfin()
-    return driver, db, cursor, client
+    return driver, client
 
 def main():
-    driver, db, cursor, client = init_programs()
+    driver, client = init_programs()
+    db = psycopg2.connect(os.getenv('POSTGRES_URI'))
+    cursor = db.cursor()
     table_name = ('prod_' if os.getenv('ENVIRONMENT') == 'PROD' else 'dev_') + 'propertydata'
     cursor.execute(f'SELECT name, cad FROM {table_name};')
     houses = [house for house in cursor.fetchall()]
