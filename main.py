@@ -161,10 +161,9 @@ def fmv(driver, client, house, retries=5):
             url = response['payload']['exactMatch']['url']
             initial_info = client.initial_info(url)['payload']
             avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+            break
         except ConnectionError:
             print("Connection Error, Retrying")
-            continue
-        break
     print("Got Redfin FMV")
     driver.get('https://trulia.com/')
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))

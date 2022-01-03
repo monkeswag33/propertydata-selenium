@@ -50,4 +50,8 @@ def test_wcad(house):
 
 @pytest.mark.parametrize("house", houses['w'])
 def test_fmv(house):
-    assert fmv(driver, client, house)
+    response = client.search(house + ' Hutto')
+    url = response['payload']['exactMatch']['url']
+    initial_info = client.initial_info(url)['payload']
+    avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+    assert avm_details
