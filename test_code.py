@@ -47,11 +47,3 @@ def test_wcad(house):
     }
     wcad(driver, house, assessed_appraised_value, 5)
     assert None not in assessed_appraised_value.values()
-
-@pytest.mark.parametrize("house", houses['w'])
-def test_fmv(house):
-    response = client.search(house + ' Hutto')
-    url = response['payload']['exactMatch']['url']
-    initial_info = client.initial_info(url)['payload']
-    avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
-    assert avm_details
