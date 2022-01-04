@@ -1,7 +1,7 @@
-from main import wcad, bcad, fmv, init_programs
+from main import Searcher
 import pytest
 
-driver, client = init_programs()
+searcher = Searcher()
 houses = {
     'b': [
         "700 San Pedro",
@@ -30,20 +30,18 @@ houses = {
 
 @pytest.mark.parametrize("house", houses['b'])
 def test_bcad(house):
-    assessed_appraised_value = {
-        'assessed_value': None,
-        'appraised_value': None,
-        'tax': None
-    }
-    bcad(driver, house, assessed_appraised_value, 5)
-    assert None not in assessed_appraised_value.values()
+    searcher.bcad(house)
+    assert None not in searcher.assessed_appraised_tax.values()
+    searcher.reset_data()
 
 @pytest.mark.parametrize("house", houses['w'])
 def test_wcad(house):
-    assessed_appraised_value = {
-        'assessed_value': None,
-        'appraised_value': None,
-        'tax': None
-    }
-    wcad(driver, house, assessed_appraised_value, 5)
-    assert None not in assessed_appraised_value.values()
+    searcher.wcad(house)
+    assert None not in searcher.assessed_appraised_tax.values()
+    searcher.reset_data()
+
+@pytest.mark.parametrize("house", houses['w'])
+def test_fmv(house):
+    searcher.get_fmv(house, redfin=False)
+    assert searcher.fmv[1] != '0'
+    searcher.reset_data()

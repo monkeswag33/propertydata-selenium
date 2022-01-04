@@ -12,229 +12,253 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 
-def bcad(driver, house, assessed_appraised_tax, max_tries):
-    print("Searching in BCAD")
-    def get_house_info(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                driver.get('https://esearch.brazoscad.org')
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "keywords")))
-                textbox = driver.find_element(By.ID, "keywords")
-                textbox.send_keys(house)
-                sleep(1)
-                textbox.send_keys(Keys.RETURN)
-                print(f'Searching for {house}')
-                WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.ID, "view-list")))
-                driver.find_element(By.ID, "view-list").click()
-                WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, f"//a[contains(text(), '{house.upper()}')]")))
-                driver.find_element(By.XPATH, f"//a[contains(text(), '{house.upper()}')]").click()
-                print('Clicked on link')
-                return True
-            except:
-                print('Error getting page info, Retrying')
-                tries += 1
-    def assessed_value(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//tr/th[contains(text(), 'Assessed Value')]/following-sibling::td")))
-                assessed_value = driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Assessed Value')]/following-sibling::td").text
-                assessed_appraised_tax['assessed_value'] = assessed_value
-                print("Got assessed value")
-                break
-            except:
-                sleep(1)
-                print('Error getting assessed value, Retrying')
-                tries += 1
-    def appraised_value(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//tr/th[contains(text(), 'Appraised Value')]/following-sibling::td")))
-                appraised_value = driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Appraised Value')]/following-sibling::td").text
-                assessed_appraised_tax['appraised_value'] = appraised_value
-                print("Got appraised value")
-                break
-            except:
-                sleep(1)
-                print('Error getting appraised value, Retrying')
-                tries += 1
-    # create function to get tax value
-    # function name is "tax"
-    def tax(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]")))
-                tax = driver.find_element(By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]").find_element(By.XPATH, "..").text.split('Estimated Taxes Without Exemptions: ')[1]
-                if not tax: raise ValueError('Tax is empty')
-                assessed_appraised_tax['tax'] = tax
-                print("Got tax value")
-                break
-            except:
-                sleep(1)
-                print('Error getting tax value, Retrying')
-                tries += 1
-    if get_house_info(max_tries):
-        assessed_value(max_tries)
-        appraised_value(max_tries)
-        tax(max_tries)
-
-def wcad(driver, house, assessed_appraised_tax, max_tries):
-    print("Searching in WCAD")
-    driver.get('https://search.wcad.org/')
-    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "SearchText")))
-    textbox = driver.find_element(By.ID, "SearchText")
-    textbox.send_keys(house)
-    textbox.send_keys(Keys.RETURN)
-    print(f'Searching for {house}')
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//td[contains(text(), '{}')]".format(house.upper()))))
-    driver.find_element(By.XPATH, "//td[contains(text(), '{}')]".format(house.upper())).click()
-    print('Clicked on link')
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_ddTaxYears")))
-    dropdown = Select(driver.find_element(By.ID, "dnn_ctr1460_View_ddTaxYears"))
-    dropdown.select_by_visible_text('2021')
-    def assessed_value(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_tdVITotalAssessedValueRP")))
-                assessed = driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAssessedValueRP").text
-                assessed_appraised_tax['assessed_value'] = assessed
-                print("Got assessed value")
-                break
-            except:
-                sleep(1)
-                print("Error retreiving assessed value, Retrying")
-                tries += 1
-    def appraised_value(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue")))
-                appraised = driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue").text
-                assessed_appraised_tax['appraised_value'] = appraised
-                print("Got appraised value")
-                break
-            except:
-                sleep(1)
-                print("Error retreiving appraised value, Retrying")
-                tries += 1
-    assessed_value(max_tries)
-    appraised_value(max_tries)
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "tdDropDownLinks")))
-    driver.find_element(By.ID, "tdDropDownLinks").click()
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Tax Office')]")))
-    driver.find_element(By.XPATH, "//a[contains(text(), 'Tax Office')]").click()
-    print("Clicked on tax office")
-    sleep(1)
-    driver.switch_to.window(driver.window_handles[1])
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_divBillDetails")))
-    div = driver.find_element(By.ID, "dnn_ctr377_View_divBillDetails")
-    div = div.find_elements(By.TAG_NAME, "div")[0]
-    table = div.find_elements(By.TAG_NAME, "table")[1]
-    tbody = table.find_element(By.TAG_NAME, "tbody")
-    tr = tbody.find_elements(By.TAG_NAME, "tr")[-1]
-    def get_tax(max_tries):
-        tries = 0
-        while tries <= max_tries:
-            try:
-                tax = tr.find_elements(By.TAG_NAME, "td")[1].text
-                if not tax: raise ValueError("Tax is empty")
-                assessed_appraised_tax['tax'] = tax
-                print("Got tax")
-                break
-            except:
-                sleep(1)
-                print("Error retrieving tax, Retrying")
-                tries += 1
-    get_tax(max_tries)
-    driver.close()
-    driver.switch_to.window(driver.window_handles[0])
-
-def fmv(driver, client, house, retries=5):
-    house = house + ' Hutto'
-    for i in range(retries):
-        try:
-            response = client.search(house)
-            url = response['payload']['exactMatch']['url']
-            initial_info = client.initial_info(url)['payload']
-            avm_details = client.avm_details(initial_info['propertyId'], initial_info['listingId'])
-            break
-        except ConnectionError:
-            print("Connection Error, Retrying")
-    print("Got Redfin FMV")
-    driver.get('https://trulia.com/')
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
-    textbox = driver.find_element(By.ID, 'banner-search')
-    textbox.send_keys(house)
-    textbox.send_keys(Keys.RETURN)
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
-    trulia_fmv = driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
-    print("Got Trulia FMV")
-    return (avm_details['payload']['predictedValue'], trulia_fmv)
-
-def init_programs():
-    options = Options()
-    options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
-    driver = webdriver.Firefox(options=options)
-    client = Redfin()
-    return driver, client
-
-def main():
-    driver, client = init_programs()
-    db = psycopg2.connect(os.getenv('POSTGRES_URI'))
-    cursor = db.cursor()
-    table_name = ('prod_' if os.getenv('ENVIRONMENT') == 'PROD' else 'dev_') + 'propertydata'
-    cursor.execute(f'SELECT name, cad FROM {table_name};')
-    houses = [house for house in cursor.fetchall()]
-    print(table_name)
-    print('Retrieved data from database')
-    for house in houses:
-        name = house[0]
-        print(name)
-        cad = house[1]
-        assessed_appraised_tax = {
+class Searcher():
+    def __init__(self, max_tries=5, database=False):
+        self.max_tries = max_tries
+        options = Options()
+        options.headless = True if os.getenv('HEADLESS') == 'TRUE' else False
+        self.driver = webdriver.Firefox(options=options)
+        self.client = Redfin()
+        if database == True:
+            self.db = psycopg2.connect(os.getenv('POSTGRES_URI'))
+            self.cursor = self.db.cursor()
+        self.table_name = ('prod_' if os.getenv('ENVIRONMENT') == 'PROD' else 'dev_') + 'propertydata'
+        self.assessed_appraised_tax = {
             'assessed_value': None,
             'appraised_value': None,
             'tax': None
         }
-        if cad == 'w': continue
-        bcad(driver, name, assessed_appraised_tax, 5) if cad == 'b' else wcad(driver, name, assessed_appraised_tax, 5)
-        print(assessed_appraised_tax)
-        if assessed_appraised_tax['assessed_value']: assessed_appraised_tax['assessed_value'] = float(assessed_appraised_tax['assessed_value'].replace(',', '').replace('$', ''))
-        if assessed_appraised_tax['appraised_value']: assessed_appraised_tax['appraised_value'] = float(assessed_appraised_tax['appraised_value'].replace(',', '').replace('$', ''))
-        if assessed_appraised_tax['tax']: assessed_appraised_tax['tax'] = float(assessed_appraised_tax['tax'].replace(',', '').replace('$', ''))
-        if cad == 'w':
-            redfin_fmv, zillow_fmv = fmv(driver, client, name)
-            zillow_fmv = float(zillow_fmv.replace(',', '').replace('$', ''))
-            average_fmv = round((zillow_fmv + redfin_fmv) / 2, 2)
-            cursor.execute(f"UPDATE {table_name} SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name='{name}';")
+        self.fmv = None
+
+    def bcad(self, house):
+        print("Searching in BCAD")
+        def get_house_info():
+            tries = 0
+            while tries <= self.max_tries:
+                try:
+                    self.driver.get('https://esearch.brazoscad.org')
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "keywords")))
+                    textbox = self.driver.find_element(By.ID, "keywords")
+                    textbox.send_keys(house)
+                    sleep(1)
+                    textbox.send_keys(Keys.RETURN)
+                    print(f'Searching for {house}')
+                    WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.ID, "view-list")))
+                    self.driver.find_element(By.ID, "view-list").click()
+                    WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, f"//a[contains(text(), '{house.upper()}')]")))
+                    self.driver.find_element(By.XPATH, f"//a[contains(text(), '{house.upper()}')]").click()
+                    print('Clicked on link')
+                    return True
+                except:
+                    print('Error getting page info, Retrying')
+                    tries += 1
+        def assessed_value():
+            tries = 0
+            while tries <= self.max_tries:
+                try:
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//tr/th[contains(text(), 'Assessed Value')]/following-sibling::td")))
+                    assessed_value = self.driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Assessed Value')]/following-sibling::td").text
+                    self.assessed_appraised_tax['assessed_value'] = assessed_value
+                    print("Got assessed value")
+                    break
+                except:
+                    sleep(1)
+                    print('Error getting assessed value, Retrying')
+                    tries += 1
+        def appraised_value():
+            tries = 0
+            while tries <= self.max_tries:
+                try:
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//tr/th[contains(text(), 'Appraised Value')]/following-sibling::td")))
+                    appraised_value = self.driver.find_element(By.XPATH, "//tr/th[contains(text(), 'Appraised Value')]/following-sibling::td").text
+                    self.assessed_appraised_tax['appraised_value'] = appraised_value
+                    print("Got appraised value")
+                    break
+                except:
+                    sleep(1)
+                    print('Error getting appraised value, Retrying')
+                    tries += 1
+        def tax():
+            tries = 0
+            while tries <= self.max_tries:
+                try:
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]")))
+                    tax = self.driver.find_element(By.XPATH, "//strong[contains(text(), 'Estimated Taxes Without Exemptions: ')]").find_element(By.XPATH, "..").text.split('Estimated Taxes Without Exemptions: ')[1]
+                    if not tax: raise ValueError('Tax is empty')
+                    self.assessed_appraised_tax['tax'] = tax
+                    print("Got tax value")
+                    break
+                except:
+                    sleep(1)
+                    print('Error getting tax value, Retrying')
+                    tries += 1
+        if get_house_info():
+            assessed_value()
+            appraised_value()
+            tax()
+
+    def wcad(self, house):
+        print("Searching in WCAD")
+        self.driver.get('https://search.wcad.org/')
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located((By.ID, "SearchText")))
+        textbox = self.driver.find_element(By.ID, "SearchText")
+        textbox.send_keys(house)
+        textbox.send_keys(Keys.RETURN)
+        print(f'Searching for {house}')
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//td[contains(text(), '{}')]".format(house.upper()))))
+        self.driver.find_element(By.XPATH, "//td[contains(text(), '{}')]".format(house.upper())).click()
+        print('Clicked on link')
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_ddTaxYears")))
+        dropdown = Select(self.driver.find_element(By.ID, "dnn_ctr1460_View_ddTaxYears"))
+        dropdown.select_by_visible_text('2021')
+        def assessed_value(max_tries):
+            tries = 0
+            while tries <= max_tries:
+                try:
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_tdVITotalAssessedValueRP")))
+                    assessed = self.driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAssessedValueRP").text
+                    self.assessed_appraised_tax['assessed_value'] = assessed
+                    print("Got assessed value")
+                    break
+                except:
+                    sleep(1)
+                    print("Error retreiving assessed value, Retrying")
+                    tries += 1
+        def appraised_value(max_tries):
+            tries = 0
+            while tries <= max_tries:
+                try:
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue")))
+                    appraised = self.driver.find_element(By.ID, "dnn_ctr1460_View_tdVITotalAppraisedValue").text
+                    self.assessed_appraised_tax['appraised_value'] = appraised
+                    print("Got appraised value")
+                    break
+                except:
+                    sleep(1)
+                    print("Error retreiving appraised value, Retrying")
+                    tries += 1
+        assessed_value(self.max_tries)
+        appraised_value(self.max_tries)
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.ID, "tdDropDownLinks")))
+        self.driver.find_element(By.ID, "tdDropDownLinks").click()
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Tax Office')]")))
+        self.driver.find_element(By.XPATH, "//a[contains(text(), 'Tax Office')]").click()
+        print("Clicked on tax office")
+        sleep(1)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_divBillDetails")))
+        div = self.driver.find_element(By.ID, "dnn_ctr377_View_divBillDetails")
+        div = div.find_elements(By.TAG_NAME, "div")[0]
+        table = div.find_elements(By.TAG_NAME, "table")[1]
+        tbody = table.find_element(By.TAG_NAME, "tbody")
+        tr = tbody.find_elements(By.TAG_NAME, "tr")[-1]
+        def get_tax(max_tries):
+            tries = 0
+            while tries <= max_tries:
+                try:
+                    tax = tr.find_elements(By.TAG_NAME, "td")[1].text
+                    if not tax: raise ValueError("Tax is empty")
+                    self.assessed_appraised_tax['tax'] = tax
+                    print("Got tax")
+                    break
+                except:
+                    sleep(1)
+                    print("Error retrieving tax, Retrying")
+                    tries += 1
+        get_tax(self.max_tries)
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
+
+    def get_fmv(self, house, redfin=True, trulia=True):
+        house = house + ' Hutto'
+        redfin_fmv = 0
+        trulia_fmv = '0'
+        if redfin:
+            for i in range(self.max_tries):
+                try:
+                    response = self.client.search(house)
+                    url = response['payload']['exactMatch']['url']
+                    initial_info = self.client.initial_info(url)['payload']
+                    avm_details = self.client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+                    break
+                except ConnectionError:
+                    print("Connection Error, Retrying")
+            redfin_fmv = avm_details['payload']['predictedValue']
+            print("Got Redfin FMV")
+        if trulia:
+            self.driver.get('https://trulia.com/')
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
+            textbox = self.driver.find_element(By.ID, 'banner-search')
+            textbox.send_keys(house)
+            textbox.send_keys(Keys.RETURN)
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
+            trulia_fmv = self.driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
+            print("Got Trulia FMV")
+        self.fmv = [redfin_fmv, trulia_fmv]
+        print(self.fmv)
+
+    def reset_data(self):
+        self.assessed_appraised_tax = {
+            'assessed_value': None,
+            'appraised_value': None,
+            'tax': None
+        }
+        self.fmv = None
+
+    def insert_database(self, name):
+        if self.assessed_appraised_tax['assessed_value']: self.assessed_appraised_tax['assessed_value'] = float(self.assessed_appraised_tax['assessed_value'].replace(',', '').replace('$', ''))
+        if self.assessed_appraised_tax['appraised_value']: self.assessed_appraised_tax['appraised_value'] = float(self.assessed_appraised_tax['appraised_value'].replace(',', '').replace('$', ''))
+        if self.assessed_appraised_tax['tax']: self.assessed_appraised_tax['tax'] = float(self.assessed_appraised_tax['tax'].replace(',', '').replace('$', ''))
+        if self.fmv:
+            self.fmv[1] = float(self.fmv[1].replace(',', '').replace('$', ''))
+            average_fmv = round((self.fmv[0] + self.fmv[1]) / len([x for x in self.fmv if x]), 2)
+            self.cursor.execute(f"UPDATE {self.table_name} SET zillow_fmv={self.fmv[1]}, redfin_fmv={self.fmv[0]}, avg_fmv={average_fmv} WHERE name='{name}';")
             print('Updated FMV')
-        cursor.execute(f"SELECT current_assessed, current_appraised, current_tax FROM {table_name} WHERE name = '{name}';")
-        last_assessed, last_appraised, last_tax = cursor.fetchone()
+        self.cursor.execute(f"SELECT current_assessed, current_appraised, current_tax FROM {self.table_name} WHERE name = '{name}';")
+        last_assessed, last_appraised, last_tax = self.cursor.fetchone()
         if any(value for value in [last_assessed, last_appraised, last_tax]):
             query = 'UPDATE {table_name} SET {values} WHERE name={house};'
             subquery = []
             for key, value in {'last_assessed': last_assessed, 'last_appraised': last_appraised, 'last_tax': last_tax}.items():
                 if value:
                     subquery.append(f'{key}={value}')
-            query = query.format(table_name=table_name, values=','.join(subquery), house=f"'{name}'")
-            cursor.execute(query)
-        if any(value for value in assessed_appraised_tax.values()):
+            query = query.format(table_name=self.table_name, values=','.join(subquery), house=f"'{name}'")
+            self.cursor.execute(query)
+        if any(value for value in self.assessed_appraised_tax.values()):
             query = 'UPDATE {table_name} SET {values}, last_updated=now() WHERE name={house};'
             subquery = []
-            for key, value in {'current_assessed': assessed_appraised_tax['assessed_value'], 'current_appraised': assessed_appraised_tax['appraised_value'], 'current_tax': assessed_appraised_tax['tax']}.items():
+            for key, value in {'current_assessed': self.assessed_appraised_tax['assessed_value'], 'current_appraised': self.assessed_appraised_tax['appraised_value'], 'current_tax': self.assessed_appraised_tax['tax']}.items():
                 if value:
                     subquery.append(f'{key}={value}')
-            query = query.format(table_name=table_name, values=', '.join(subquery), house=f"'{name}'")
+            query = query.format(table_name=self.table_name, values=', '.join(subquery), house=f"'{name}'")
             print(query)
-            cursor.execute(query)
+            self.cursor.execute(query)
         print(f"Updated {name}")
-    db.commit()
-    cursor.close()
-    db.close()
-    driver.quit()
+        self.assessed_appraised_tax = {
+            'assessed_value': None,
+            'appraised_value': None,
+            'tax': None
+        }
+        self.fmv = None
+
+    def shutdown(self):
+        self.db.commit()
+        self.cursor.close()
+        self.db.close()
+        self.driver.quit()
+
+
+def main():
+    searcher = Searcher(database=True)
+    searcher.cursor.execute(f'SELECT name, cad FROM {searcher.table_name};')
+    houses = [house for house in searcher.cursor.fetchall()]
+    print(searcher.table_name)
+    print('Retrieved data from database')
+    for house in houses:
+        name, cad = house
+        searcher.bcad(name) if cad == 'b' else searcher.wcad(name)
+        if cad == 'w': searcher.get_fmv(name)
+        searcher.insert_database(name)
+    searcher.shutdown()
 if __name__ == '__main__':
     main()
