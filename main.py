@@ -169,27 +169,33 @@ class Searcher():
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-    def get_fmv(self, house):
+    def get_fmv(self, house, redfin=True, trulia=True):
         house = house + ' Hutto'
-        for i in range(self.max_tries):
-            try:
-                response = self.client.search(house)
-                url = response['payload']['exactMatch']['url']
-                initial_info = self.client.initial_info(url)['payload']
-                avm_details = self.client.avm_details(initial_info['propertyId'], initial_info['listingId'])
-                break
-            except ConnectionError:
-                print("Connection Error, Retrying")
-        print("Got Redfin FMV")
-        self.driver.get('https://trulia.com/')
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
-        textbox = self.driver.find_element(By.ID, 'banner-search')
-        textbox.send_keys(house)
-        textbox.send_keys(Keys.RETURN)
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
-        trulia_fmv = self.driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
-        print("Got Trulia FMV")
-        self.fmv = (avm_details['payload']['predictedValue'], trulia_fmv)
+        redfin_fmv = 0
+        trulia_fmv = '0'
+        if redfin:
+            for i in range(self.max_tries):
+                try:
+                    response = self.client.search(house)
+                    url = response['payload']['exactMatch']['url']
+                    initial_info = self.client.initial_info(url)['payload']
+                    avm_details = self.client.avm_details(initial_info['propertyId'], initial_info['listingId'])
+                    break
+                except ConnectionError:
+                    print("Connection Error, Retrying")
+            redfin_fmv = avm_details['payload']['predictedValue']
+            print("Got Redfin FMV")
+        if trulia:
+            self.driver.get('https://trulia.com/')
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
+            textbox = self.driver.find_element(By.ID, 'banner-search')
+            textbox.send_keys(house)
+            textbox.send_keys(Keys.RETURN)
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
+            trulia_fmv = self.driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
+            print("Got Trulia FMV")
+        self.fmv = [redfin_fmv, trulia_fmv]
+        print(self.fmv)
 
     def reset_data(self):
         self.assessed_appraised_tax = {
@@ -204,10 +210,9 @@ class Searcher():
         if self.assessed_appraised_tax['appraised_value']: self.assessed_appraised_tax['appraised_value'] = float(self.assessed_appraised_tax['appraised_value'].replace(',', '').replace('$', ''))
         if self.assessed_appraised_tax['tax']: self.assessed_appraised_tax['tax'] = float(self.assessed_appraised_tax['tax'].replace(',', '').replace('$', ''))
         if self.fmv:
-            redfin_fmv, zillow_fmv = self.fmv
-            zillow_fmv = float(zillow_fmv.replace(',', '').replace('$', ''))
-            average_fmv = round((zillow_fmv + redfin_fmv) / 2, 2)
-            self.cursor.execute(f"UPDATE {self.table_name} SET zillow_fmv={zillow_fmv}, redfin_fmv={redfin_fmv}, avg_fmv={average_fmv} WHERE name='{name}';")
+            self.fmv[1] = float(self.fmv[1].replace(',', '').replace('$', ''))
+            average_fmv = round((self.fmv[0] + self.fmv[1]) / len([x for x in self.fmv if x]), 2)
+            self.cursor.execute(f"UPDATE {self.table_name} SET zillow_fmv={self.fmv[1]}, redfin_fmv={self.fmv[0]}, avg_fmv={average_fmv} WHERE name='{name}';")
             print('Updated FMV')
         self.cursor.execute(f"SELECT current_assessed, current_appraised, current_tax FROM {self.table_name} WHERE name = '{name}';")
         last_assessed, last_appraised, last_tax = self.cursor.fetchone()

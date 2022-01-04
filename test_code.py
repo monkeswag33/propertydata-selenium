@@ -42,6 +42,6 @@ def test_wcad(house):
 
 @pytest.mark.parametrize("house", houses['w'])
 def test_fmv(house):
-    searcher.get_fmv(house)
-    assert None not in searcher.fmv
+    searcher.get_fmv(house, redfin=False)
+    assert searcher.fmv[1] != '0'
     searcher.reset_data()
