@@ -191,6 +191,14 @@ class Searcher():
         print("Got Trulia FMV")
         self.fmv = (avm_details['payload']['predictedValue'], trulia_fmv)
 
+    def reset_data(self):
+        self.assessed_appraised_tax = {
+            'assessed_value': None,
+            'appraised_value': None,
+            'tax': None
+        }
+        self.fmv = None
+
     def insert_database(self, name):
         if self.assessed_appraised_tax['assessed_value']: self.assessed_appraised_tax['assessed_value'] = float(self.assessed_appraised_tax['assessed_value'].replace(',', '').replace('$', ''))
         if self.assessed_appraised_tax['appraised_value']: self.assessed_appraised_tax['appraised_value'] = float(self.assessed_appraised_tax['appraised_value'].replace(',', '').replace('$', ''))
