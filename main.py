@@ -195,7 +195,6 @@ class Searcher():
             trulia_fmv = self.driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
             print("Got Trulia FMV")
         self.fmv = [redfin_fmv, trulia_fmv]
-        print(self.fmv)
 
     def reset_data(self):
         self.assessed_appraised_tax = {
@@ -231,7 +230,6 @@ class Searcher():
                 if value:
                     subquery.append(f'{key}={value}')
             query = query.format(table_name=self.table_name, values=', '.join(subquery), house=f"'{name}'")
-            print(query)
             self.cursor.execute(query)
         print(f"Updated {name}")
         self.assessed_appraised_tax = {
@@ -252,7 +250,6 @@ def main():
     searcher = Searcher(database=True)
     searcher.cursor.execute(f'SELECT name, cad FROM {searcher.table_name};')
     houses = [house for house in searcher.cursor.fetchall()]
-    print(searcher.table_name)
     print('Retrieved data from database')
     for house in houses:
         name, cad = house
