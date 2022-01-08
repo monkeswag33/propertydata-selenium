@@ -146,26 +146,36 @@ class Searcher():
         print("Clicked on tax office")
         sleep(1)
         self.driver.switch_to.window(self.driver.window_handles[1])
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_divBillDetails")))
-        div = self.driver.find_element(By.ID, "dnn_ctr377_View_divBillDetails")
-        div = div.find_elements(By.TAG_NAME, "div")[0]
-        table = div.find_elements(By.TAG_NAME, "table")[1]
-        tbody = table.find_element(By.TAG_NAME, "tbody")
-        tr = tbody.find_elements(By.TAG_NAME, "tr")[-1]
-        def get_tax(max_tries):
+        def tax_page(max_tries):
             tries = 0
             while tries <= max_tries:
                 try:
-                    tax = tr.find_elements(By.TAG_NAME, "td")[1].text
-                    if not tax: raise ValueError("Tax is empty")
-                    self.assessed_appraised_tax['tax'] = tax
-                    print("Got tax")
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_divBillDetails")))
+                    div = self.driver.find_element(By.ID, "dnn_ctr377_View_divBillDetails")
+                    div = div.find_elements(By.TAG_NAME, "div")[0]
+                    table = div.find_elements(By.TAG_NAME, "table")[1]
+                    tbody = table.find_element(By.TAG_NAME, "tbody")
+                    tr = tbody.find_elements(By.TAG_NAME, "tr")[-1]
+                    def get_tax(max_tries):
+                        tries = 0
+                        while tries <= max_tries:
+                            try:
+                                tax = tr.find_elements(By.TAG_NAME, "td")[1].text
+                                if not tax: raise ValueError("Tax is empty")
+                                self.assessed_appraised_tax['tax'] = tax
+                                print("Got tax")
+                                break
+                            except:
+                                sleep(1)
+                                print("Error retrieving tax, Retrying")
+                                tries += 1
+                    get_tax(self.max_tries)
                     break
                 except:
                     sleep(1)
-                    print("Error retrieving tax, Retrying")
+                    print("Error retreiving tax page, Retrying")
                     tries += 1
-        get_tax(self.max_tries)
+        tax_page(self.max_tries)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
