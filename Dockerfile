@@ -15,4 +15,4 @@ RUN apt-get install -y --no-install-recommends firefox
 
 # Download and geckodriver
 RUN wget -qO- https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz | tar xz -C /bin
-CMD [ "pypy3", "./main.py" ]
+CMD [ "pypy3", "-u", "./main.py", "|", "tee", "logs/log_$(date +\"%m-%d-%Y_%H-%M-%S\").log" ]
