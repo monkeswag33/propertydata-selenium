@@ -1,10 +1,10 @@
 FROM pypy:latest
 WORKDIR /usr/src/app
-COPY requirements.txt ./
+COPY base-packages.txt ./
 
 # Install dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r base-packages.txt
 
 # Install firefox
 RUN apt-get update
@@ -14,8 +14,8 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends firefox
 # Uninstall packages
 RUN apt-get remove --purge -y software-properties-common
-RUN apt-get autoremove -y
 RUN apt-get upgrade -y
+RUN apt-get autoremove -y
 # Download and geckodriver
 RUN wget -qO- https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz | tar xz -C /bin
-CMD [ "pypy3", "-u", "./main.py", "|", "tee", "logs/log_$(date +\"%m-%d-%Y_%H-%M-%S\").log" ]
+CMD [ "pypy3", "-u", "./main.py" ]

@@ -1,0 +1,6 @@
+selenium
+redfin
+psycopg2
+python-dotenv
+pytest
+flake8

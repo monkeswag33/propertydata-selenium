@@ -1,6 +1,0 @@
-flake8
-pytest
-selenium
-redfin
-psycopg2
-python-dotenv

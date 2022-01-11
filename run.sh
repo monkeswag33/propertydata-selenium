@@ -1,2 +1,2 @@
-cd /home/ishank/production
-/usr/bin/python3.8 -u /home/ishank/production/main.py | tee "/home/ishank/production/logs/log_`date +"%m-%d-%Y_%H-%M-%S"`.log"
+docker compose up | tee "logs/log_`date +"%m-%d-%Y_%H-%M-%S"`.log"
+docker compose down
