@@ -257,6 +257,11 @@ class Searcher():
 
 
 def main():
+    try:
+        from pyfiglet import Figlet
+        figlet = Figlet(font='slant', width=200)
+        print(figlet.renderText('Property Data Scraper'))
+    except: pass
     searcher = Searcher(database=True)
     searcher.cursor.execute(f'SELECT name, cad FROM {searcher.table_name};')
     houses = [house for house in searcher.cursor.fetchall()]
