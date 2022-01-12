@@ -139,17 +139,18 @@ class Searcher():
                     tries += 1
         assessed_value(self.max_tries)
         appraised_value(self.max_tries)
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.ID, "tdDropDownLinks")))
-        self.driver.find_element(By.ID, "tdDropDownLinks").click()
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Tax Office')]")))
-        self.driver.find_element(By.XPATH, "//a[contains(text(), 'Tax Office')]").click()
-        print("Clicked on tax office")
-        sleep(1)
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        current_url = self.driver.current_url
         def tax_page(max_tries):
             tries = 0
             while tries <= max_tries:
                 try:
+                    WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.ID, "tdDropDownLinks")))
+                    self.driver.find_element(By.ID, "tdDropDownLinks").click()
+                    WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Tax Office')]")))
+                    self.driver.find_element(By.XPATH, "//a[contains(text(), 'Tax Office')]").click()
+                    print("Clicked on tax office")
+                    sleep(1)
+                    self.driver.switch_to.window(self.driver.window_handles[1])
                     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "dnn_ctr377_View_divBillDetails")))
                     div = self.driver.find_element(By.ID, "dnn_ctr377_View_divBillDetails")
                     div = div.find_elements(By.TAG_NAME, "div")[0]
@@ -174,9 +175,12 @@ class Searcher():
                 except:
                     sleep(1)
                     print("Error retreiving tax page, Retrying")
+                    self.driver.close()
+                    self.driver.switch_to.window(self.driver.window_handles[0])
+                    self.driver.get(current_url)
                     tries += 1
         tax_page(self.max_tries)
-        self.driver.close()
+        if len(self.driver.window_handles) > 1: self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
     def get_fmv(self, house, redfin=True, trulia=True):
