@@ -3,6 +3,6 @@ version: '3.9'
 services:
     propertydata:
         container_name: propertydata
-        build: .
+        image: propertydata
         volumes:
           - .:/usr/src/app
