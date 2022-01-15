@@ -28,7 +28,7 @@ class Searcher():
             'appraised_value': None,
             'tax': None
         }
-        self.fmv = None
+        self.fmv = [None, None]
 
     def bcad(self, house):
         print("Searching in BCAD")
@@ -198,17 +198,26 @@ class Searcher():
                 except ConnectionError:
                     print("Connection Error, Retrying")
             redfin_fmv = avm_details['payload']['predictedValue']
+            self.fmv[0] = redfin_fmv
             print("Got Redfin FMV")
         if trulia:
-            self.driver.get('https://trulia.com/')
-            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
-            textbox = self.driver.find_element(By.ID, 'banner-search')
-            textbox.send_keys(house)
-            textbox.send_keys(Keys.RETURN)
-            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
-            trulia_fmv = self.driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
-            print("Got Trulia FMV")
-        self.fmv = [redfin_fmv, trulia_fmv]
+            tries = 0
+            while tries <= self.max_tries:
+                try:
+                    self.driver.get('https://trulia.com/')
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, 'banner-search')))
+                    textbox = self.driver.find_element(By.ID, 'banner-search')
+                    textbox.send_keys(house)
+                    textbox.send_keys(Keys.RETURN)
+                    WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']")))
+                    trulia_fmv = self.driver.find_element(By.XPATH, "//div[@class='Text__TextBase-sc-1cait9d-0-div Text__TextContainerBase-sc-1cait9d-1 nBoMt']").text
+                    print("Got Trulia FMV")
+                    break
+                except:
+                    sleep(1)
+                    print("Error retreiving FMV, Retrying")
+                    tries += 1
+            self.fmv[1] = trulia_fmv
 
     def reset_data(self):
         self.assessed_appraised_tax = {
@@ -222,7 +231,7 @@ class Searcher():
         if self.assessed_appraised_tax['assessed_value']: self.assessed_appraised_tax['assessed_value'] = float(self.assessed_appraised_tax['assessed_value'].replace(',', '').replace('$', ''))
         if self.assessed_appraised_tax['appraised_value']: self.assessed_appraised_tax['appraised_value'] = float(self.assessed_appraised_tax['appraised_value'].replace(',', '').replace('$', ''))
         if self.assessed_appraised_tax['tax']: self.assessed_appraised_tax['tax'] = float(self.assessed_appraised_tax['tax'].replace(',', '').replace('$', ''))
-        if self.fmv:
+        if any(self.fmv):
             self.fmv[1] = float(self.fmv[1].replace(',', '').replace('$', ''))
             average_fmv = round((self.fmv[0] + self.fmv[1]) / len([x for x in self.fmv if x]), 2)
             self.cursor.execute(f"UPDATE {self.table_name} SET zillow_fmv={self.fmv[1]}, redfin_fmv={self.fmv[0]}, avg_fmv={average_fmv} WHERE name='{name}';")
@@ -251,7 +260,7 @@ class Searcher():
             'appraised_value': None,
             'tax': None
         }
-        self.fmv = None
+        self.fmv = [None, None]
 
     def shutdown(self):
         self.db.commit()
