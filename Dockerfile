@@ -1,4 +1,4 @@
-FROM pypy:latest
+FROM python:3.9.10-bullseye
 WORKDIR /usr/src/app
 COPY base-packages.txt ./
 
@@ -18,4 +18,4 @@ RUN apt-get upgrade -y
 RUN apt-get autoremove -y
 # Download and geckodriver
 RUN wget -qO- https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz | tar xz -C /bin
-CMD [ "pypy3", "-u", "./main.py" ]
+CMD [ "python", "-u", "./main.py" ]
