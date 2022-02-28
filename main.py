@@ -198,8 +198,8 @@ class Searcher():
                 except ConnectionError:
                     print("Connection Error, Retrying")
             redfin_fmv = avm_details['payload']['predictedValue']
-            self.fmv[0] = redfin_fmv
             print("Got Redfin FMV")
+        self.fmv[0] = redfin_fmv
         if trulia:
             tries = 0
             while tries <= self.max_tries:
@@ -217,7 +217,7 @@ class Searcher():
                     sleep(1)
                     print("Error retreiving FMV, Retrying")
                     tries += 1
-            self.fmv[1] = trulia_fmv
+        self.fmv[1] = trulia_fmv
 
     def reset_data(self):
         self.assessed_appraised_tax = {
@@ -282,7 +282,7 @@ def main():
     for house in houses:
         name, cad = house
         searcher.bcad(name) if cad == 'b' else searcher.wcad(name)
-        if cad == 'w': searcher.get_fmv(name)
+        if cad == 'w': searcher.get_fmv(name, redfin=True, trulia=False)
         searcher.insert_database(name)
     searcher.shutdown()
 if __name__ == '__main__':
